@@ -7,8 +7,7 @@
     "dev": "pnpm --filter @sunlit-ui/play dev",
     "docs:dev": "pnpm --filter @sunlit-ui/docs dev",
     "docs:build": "pnpm --filter @sunlit-ui/docs build",
-    "docs:preview": "pnpm --filter @sunlit-ui/docs preview",
-    "prepare": "husky install"
+    "docs:preview": "pnpm --filter @sunlit-ui/docs preview"
   },
   "keywords": [],
   "author": "",
@@ -27,8 +26,7 @@
     "typescript": "5.4.5",
     "vite": "5.3.1",
     "vitest": "1.6.0",
-    "vue-tsc": "2.0.21",
-    "husky": "^8.0.0"
+    "vue-tsc": "2.0.21"
   },
   "dependencies": {
     "@sunlit-ui/hooks": "workspace:*",
