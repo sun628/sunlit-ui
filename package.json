@@ -8,8 +8,7 @@
     "docs:dev": "pnpm --filter @sunlit-ui/docs dev",
     "docs:build": "pnpm --filter @sunlit-ui/docs build",
     "docs:preview": "pnpm --filter @sunlit-ui/docs preview",
-    "prepare": "husky install",
-    "test": "todo"
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
