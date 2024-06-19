@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "pnpm --filter @sunlit-ui/play dev",
+    "dev": "pnpm -C packages/play dev",
     "docs:dev": "pnpm --filter @sunlit-ui/docs dev",
     "docs:build": "pnpm --filter @sunlit-ui/docs build",
     "docs:preview": "pnpm --filter @sunlit-ui/docs preview",
-    "test": "echo todo"
+    "test": "pnpm -C packages/components test"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +18,8 @@
     "@types/node": "20.14.4",
     "@vitejs/plugin-vue": "5.0.5",
     "@vitejs/plugin-vue-jsx": "4.0.0",
+    "@vitest/coverage-v8": "^1.6.0",
+    "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "0.5.1",
     "postcss-color-mix": "1.1.0",
     "postcss-each": "1.1.0",
@@ -36,5 +38,11 @@
     "lodash-es": "4.17.21",
     "sunlit-ui": "workspace:*",
     "vue": "3.4.29"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "volta": {
+    "node": "18.20.1"
   }
 }

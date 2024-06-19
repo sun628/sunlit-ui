@@ -8,7 +8,7 @@ import HelloWorld from './components/HelloWorld.vue';
       <img src="/vite.svg" class="logo" alt="Vite logo" />
     </a>
     <a href="https://vuejs.org/" target="_blank">
-      <n-button>222222</n-button>
+      <n-button type="primary">222222</n-button>
     </a>
   </div>
   <HelloWorld msg="Vite + Vue" />
