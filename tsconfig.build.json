@@ -11,6 +11,7 @@
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
+    "removeComments": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "preserve",
@@ -20,14 +21,19 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "types": ["node"],
+    "baseUrl": "./",
+    "paths": {
+      "@eric-ui/components": ["./packages/components"]
+    }
   },
   "include": [
-    "typings/**/*.d.ts",
-    "packages/**/*.ts",
-    "packages/**/*.tsx",
-    "packages/**/*.vue",
-    "packages/play/src/stories/*.stories.ts",
-    "vitest.config.ts"
-  ]
+    "env.d.ts",
+    "packages/core/index.ts",
+    "packages/hooks/**/*.ts",
+    "packages/utils/**/*.ts",
+    "packages/components/**/*.ts"
+  ],
+  "exclude": ["packages/components/vitest.config.ts", "packages/components/index.test.ts"]
 }
