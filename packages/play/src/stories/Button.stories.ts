@@ -8,7 +8,7 @@ const meta: Meta<typeof NButton> = {
   title: 'Example/Button',
   component: NButton,
   subcomponents: { ButtonGroup: NButtonGroup },
-  tags: ['autodocs'],
+  tags: ['autodocs'], //自动展示doc文档
   argTypes: {
     type: {
       control: { type: 'select' },

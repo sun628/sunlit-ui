@@ -4,7 +4,7 @@ import { defineConfig } from 'vitepress';
 export default defineConfig({
   title: 'Sunlit UI',
   description: '组件库',
-  base: '/sunlit-ui/', //托管github配置
+  base: '/sunlit-ui/', //托管github配置--同名仓库
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
