@@ -173,7 +173,6 @@
     }
     &:not(:first-child):not(:last-child) {
       border-radius: 0;
-
       border-left-color: var(--n-button-group-border-color);
       border-right-color: var(--n-button-group-border-color);
     }

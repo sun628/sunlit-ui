@@ -1,4 +1,4 @@
-import { NButton } from '@sunlit-ui/components';
+import { NButton, NIcon } from '@sunlit-ui/components';
 import type { Plugin } from 'vue';
 
-export default [NButton] as Plugin[];
+export default [NButton, NIcon] as Plugin[];

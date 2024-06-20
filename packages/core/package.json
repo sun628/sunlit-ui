@@ -1,15 +1,52 @@
 {
   "name": "sunlit-ui",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "description": "components library by Vue3 + TS",
+  "type": "module",
+  "main": "./dist/umd/index.umd.cjs",
+  "module": "./dist/es/index.js",
+  "types": "./dist/types/core/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/es/index.js",
+      "require": "./dist/umd/index.umd.cjs",
+      "types": "./dist/types/core/index.d.ts"
+    },
+    "./dist/": {
+      "import": "./dist/",
+      "require": "./dist/"
+    }
   },
-  "keywords": [],
-  "author": "",
+  "sideEffects": [
+    "./dist/index.css"
+  ],
+  "scripts": {
+    "build": "run-s clear build-only move-style",
+    "build-only": "run-p build-es build-umd",
+    "build-umd": "vite build --config vite.config.umd.ts",
+    "build-es": "vite build --config vite.config.es.ts",
+    "move-style": "move-file dist/es/index.css dist/index.css",
+    "clear": "rimraf dist",
+    "release": "release-it"
+  },
+  "keywords": [
+    "Vue3",
+    "typescript"
+  ],
+  "author": "nuanyang",
   "license": "ISC",
   "dependencies": {
-    "@sunlit-ui/components": "workspace:*"
+    "@sunlit-ui/components": "workspace:*",
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@fortawesome/vue-fontawesome": "^3.0.8",
+    "@popperjs/core": "^2.11.8",
+    "async-validator": "^4.2.5"
+  },
+  "peerDependencies": {
+    "vue": "3.4.29"
   }
 }

@@ -9,10 +9,15 @@
     "docs:dev": "pnpm --filter @sunlit-ui/docs dev",
     "docs:build": "pnpm --filter @sunlit-ui/docs build",
     "docs:preview": "pnpm --filter @sunlit-ui/docs preview",
-    "test": "pnpm -C packages/components test"
+    "test": "pnpm -C packages/components test",
+    "test:ui": "pnpm -C packages/components test:ui",
+    "build": "pnpm -C packages/core build"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "Vue3",
+    "typescript"
+  ],
+  "author": "nuanyang",
   "license": "ISC",
   "devDependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
@@ -23,22 +28,30 @@
     "@vitejs/plugin-vue": "5.0.5",
     "@vitejs/plugin-vue-jsx": "4.0.0",
     "@vitest/coverage-v8": "^1.6.0",
+    "@vitest/ui": "^1.6.0",
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "0.5.1",
+    "move-file-cli": "^3.0.0",
+    "npm-run-all": "^4.1.5",
     "postcss-color-mix": "1.1.0",
     "postcss-each": "1.1.0",
     "postcss-each-variables": "0.3.0",
     "postcss-for": "2.1.1",
     "postcss-nested": "6.0.1",
+    "release-it": "^17.3.0",
+    "rimraf": "^5.0.7",
     "typescript": "5.4.5",
     "vite": "5.3.1",
+    "vite-plugin-dts": "^3.9.1",
     "vitest": "1.6.0",
     "vue-tsc": "2.0.21"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.8",
     "@sunlit-ui/hooks": "workspace:*",
     "@sunlit-ui/theme": "workspace:*",
     "@sunlit-ui/utils": "workspace:*",
+    "async-validator": "^4.2.5",
     "lodash-es": "4.17.21",
     "sunlit-ui": "workspace:*",
     "vue": "3.4.29"

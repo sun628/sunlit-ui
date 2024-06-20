@@ -4,7 +4,8 @@
   "private": true,
   "main": "index.ts",
   "scripts": {
-    "test": "vitest --coverage"
+    "test": "vitest --coverage",
+    "test:ui": "vitest --ui"
   },
   "devDependencies": {
     "axios": "^1.6.8"

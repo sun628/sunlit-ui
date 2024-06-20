@@ -3,6 +3,7 @@ import { ref, computed, inject } from 'vue';
 import type { ButtonProps, ButtonEmits, ButtonInstance } from './types';
 import { BUTTON_GROUP_CTX_KEY } from './constants';
 import { throttle } from 'lodash-es';
+import NIcon from '../Icon/Icon.vue';
 defineOptions({
   name: 'NButton',
 });
@@ -27,7 +28,7 @@ const iconStyle = computed(() => ({
 const handleBtnClick = (e: MouseEvent) => {
   emits('click', e);
 };
-const handlBtnCLickThrottle = throttle(handleBtnClick, props.throttleDuration);
+const handlBtneCLickThrottle = throttle(handleBtnClick, props.throttleDuration);
 
 defineExpose<ButtonInstance>({
   ref: _ref,
@@ -36,6 +37,7 @@ defineExpose<ButtonInstance>({
   type,
 });
 </script>
+
 <template>
   <component
     :is="tag"
@@ -54,7 +56,7 @@ defineExpose<ButtonInstance>({
     :type="tag === 'button' ? nativeType : void 0"
     :autofocus="autofocus"
     @click="
-      (e: MouseEvent) => (useThrottle ? handlBtnCLickThrottle(e) : handleBtnClick(e))
+      (e: MouseEvent) => (useThrottle ? handlBtneCLickThrottle(e) : handleBtnClick(e))
     "
   >
     <template v-if="loading">
