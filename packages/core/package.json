@@ -24,12 +24,10 @@
     "./dist/index.css"
   ],
   "scripts": {
-    "build": "run-s clear build-only move-style",
+    "build": "run-s build-only",
     "build-only": "run-p build-es build-umd",
     "build-umd": "vite build --config vite.config.umd.ts",
     "build-es": "vite build --config vite.config.es.ts",
-    "move-style": "move-file dist/es/index.css dist/index.css",
-    "clear": "rimraf dist",
     "release": "release-it"
   },
   "keywords": [
@@ -39,14 +37,17 @@
   "author": "nuanyang",
   "license": "ISC",
   "dependencies": {
-    "@sunlit-ui/components": "workspace:*",
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/vue-fontawesome": "^3.0.8",
     "@popperjs/core": "^2.11.8",
+    "@sunlit-ui/components": "workspace:*",
     "async-validator": "^4.2.5"
   },
   "peerDependencies": {
     "vue": "3.4.29"
+  },
+  "devDependencies": {
+    "vite-plugin-compression2": "^1.1.1"
   }
 }
