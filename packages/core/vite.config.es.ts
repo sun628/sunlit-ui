@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import { readdirSync } from 'fs';
 import vue from '@vitejs/plugin-vue';
-import { filter, includes, map } from 'lodash-es';
+import { filter, map } from 'lodash-es';
 import { resolve } from 'path';
 import dts from 'vite-plugin-dts';
 
@@ -24,6 +24,7 @@ export default defineConfig({
   ],
   build: {
     outDir: 'dist/es',
+    cssCodeSplit: true, // CSS 代码拆分
     lib: {
       entry: resolve(__dirname, './index.ts'),
       name: 'sunlit-ui',
@@ -42,18 +43,25 @@ export default defineConfig({
       output: {
         assetFileNames: (assetInfo) => {
           if (assetInfo.name === 'style.css') return 'index.css';
+          if (assetInfo.type === 'asset' && /\.(css)$/i.test(assetInfo.name as string)) {
+            return 'theme/[name].[ext]';
+          }
           return assetInfo.name as string;
         },
         manualChunks(id) {
-          if (includes(id, 'node_modules')) return 'vendor';
-
-          if (includes(id, '/packages/hooks')) return 'hooks';
-
-          if (includes(id, '/packages/utils') || includes(id, 'plugin-vue:export-helper'))
+          if (id.includes('node_modules')) {
+            return 'vendor';
+          }
+          if (id.includes('/packages/hooks')) {
+            return 'hooks';
+          }
+          if (id.includes('/packages/utils') || id.includes('plugin-vue:export-helper')) {
             return 'utils';
-
-          for (const item of getDirectoriesSync('../components')) {
-            if (includes(id, `/packages/components/${item}`)) return item;
+          }
+          for (const dirName of getDirectoriesSync('../components')) {
+            if (id.includes(`/packages/components/${dirName}`)) {
+              return dirName;
+            }
           }
         },
       },
