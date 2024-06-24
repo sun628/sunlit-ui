@@ -48,6 +48,8 @@
     "vue": "3.4.29"
   },
   "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.4",
+    "terser": "^5.31.1",
     "vite-plugin-compression2": "^1.1.1"
   }
 }
