@@ -24,10 +24,12 @@
     "./dist/index.css"
   ],
   "scripts": {
-    "build": "run-s build-only",
-    "build-only": "run-p build-es build-umd",
+    "build": "run-p build-es build-umd",
+    "build:watch": "run-p build-es:watch build-umd:watch",
     "build-umd": "vite build --config vite.config.umd.ts",
     "build-es": "vite build --config vite.config.es.ts",
+    "build-umd:watch": "vite build --watch --config vite.config.umd.ts",
+    "build-es:watch": "vite build --watch --config vite.config.es.ts",
     "release": "release-it"
   },
   "keywords": [
