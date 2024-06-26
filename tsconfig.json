@@ -23,6 +23,7 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": [
+    "env.d.ts",
     "typings/**/*.d.ts",
     "packages/**/*.ts",
     "packages/**/*.tsx",
