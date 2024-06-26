@@ -2,11 +2,11 @@ import { defineConfig } from 'vite';
 import { readdir, readdirSync } from 'fs';
 import vue from '@vitejs/plugin-vue';
 import { defer, delay, filter, map } from 'lodash-es';
+import terser from '@rollup/plugin-terser';
+import ModifyFiles from './ModifyFiles';
 import { resolve } from 'path';
 import dts from 'vite-plugin-dts';
 import shell from 'shelljs';
-import ModifyFiles from './ModifyFiles';
-import terser from '@rollup/plugin-terser';
 
 const isProd = process.env.NODE_ENV === 'production';
 const isDev = process.env.NODE_ENV === 'development';
@@ -62,8 +62,6 @@ export default defineConfig({
         beautify: !isProd,
         comments: !isProd,
       },
-
-      // `mangle`: 混淆选项对象
       mangle: {
         toplevel: isProd,
         eval: isProd,
@@ -74,6 +72,7 @@ export default defineConfig({
   ],
   build: {
     outDir: 'dist/es',
+    // minify: false,
     cssCodeSplit: true, // CSS 代码拆分
     lib: {
       entry: resolve(__dirname, './index.ts'),
