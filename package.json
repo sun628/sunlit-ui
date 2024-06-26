@@ -9,9 +9,10 @@
     "docs:dev": "pnpm --filter @sunlit-ui/docs dev",
     "docs:build": "pnpm --filter @sunlit-ui/docs build",
     "docs:preview": "pnpm --filter @sunlit-ui/docs preview",
-    "test": "pnpm -C packages/components test",
-    "test:ui": "pnpm -C packages/components test:ui",
-    "build": "pnpm -C packages/core build"
+    "test": "cross-env NODE_ENV=test pnpm --filter @sunlit-ui/components test",
+    "test:ui": "cross-env NODE_ENV=test pnpm --filter @sunlit-ui/components test:ui",
+    "build": "cross-env NODE_ENV=production pnpm --filter sunlit-ui build",
+    "build:dev": "cross-env NODE_ENV=development pnpm --filter sunlit-ui build:watch"
   },
   "keywords": [
     "Vue3",
