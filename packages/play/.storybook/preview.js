@@ -1,4 +1,4 @@
-import 'sunlit-ui/dist/index.css';
+import 'sunlit-ui/dist/theme/index.css';
 
 /** @type { import('@storybook/vue3').Preview } */
 const preview = {
