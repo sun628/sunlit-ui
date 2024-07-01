@@ -9,6 +9,10 @@
   "files": [
     "dist"
   ],
+  "sideEffects": [
+    "./dist/index.css",
+    "./dist/theme/*.css"
+  ],
   "exports": {
     ".": {
       "import": "./dist/es/index.js",
@@ -20,16 +24,13 @@
       "require": "./dist/"
     }
   },
-  "sideEffects": [
-    "./dist/index.css"
-  ],
   "scripts": {
     "build": "run-p build-es build-umd",
     "build:watch": "run-p build-es:watch build-umd:watch",
-    "build-umd": "vite build --config vite.config.umd.ts",
-    "build-es": "vite build --config vite.config.es.ts",
-    "build-umd:watch": "vite build --watch --config vite.config.umd.ts",
-    "build-es:watch": "vite build --watch --config vite.config.es.ts",
+    "build-es": "vite build --config build/vite.config.es.ts",
+    "build-umd": "vite build --config build/vite.config.umd.ts",
+    "build-es:watch": "vite build --watch --config build/vite.config.es.ts",
+    "build-umd:watch": "vite build --watch --config build/vite.config.umd.ts",
     "release": "release-it"
   },
   "keywords": [
