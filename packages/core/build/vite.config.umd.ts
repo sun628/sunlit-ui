@@ -4,7 +4,7 @@ import { resolve } from 'path';
 import { compression } from 'vite-plugin-compression2';
 import terser from '@rollup/plugin-terser';
 import { defer, delay } from 'lodash-es';
-import ModifyFiles from './ModifyFiles';
+import ModifyFiles from '../ModifyFiles';
 import { readFile } from 'fs';
 import shell from 'shelljs';
 
@@ -46,7 +46,7 @@ export default defineConfig({
   build: {
     outDir: 'dist/umd',
     lib: {
-      entry: resolve(__dirname, './index.ts'),
+      entry: resolve(__dirname, '../index.ts'),
       name: 'sunlit-ui',
       fileName: 'index',
       formats: ['umd'],

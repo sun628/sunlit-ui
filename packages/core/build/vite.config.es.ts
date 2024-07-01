@@ -1,11 +1,13 @@
 import { defineConfig } from 'vite';
 import { readdir, readdirSync } from 'fs';
-import vue from '@vitejs/plugin-vue';
-import { defer, delay, filter, map } from 'lodash-es';
-import terser from '@rollup/plugin-terser';
-import ModifyFiles from './ModifyFiles';
 import { resolve } from 'path';
+import { defer, delay, filter, map } from 'lodash-es';
+
+import terser from '@rollup/plugin-terser';
+import ModifyFiles from '../ModifyFiles';
+
 import dts from 'vite-plugin-dts';
+import vue from '@vitejs/plugin-vue';
 import shell from 'shelljs';
 
 const isProd = process.env.NODE_ENV === 'production';
@@ -75,7 +77,7 @@ export default defineConfig({
     // minify: false,
     cssCodeSplit: true, // CSS 代码拆分
     lib: {
-      entry: resolve(__dirname, './index.ts'),
+      entry: resolve(__dirname, '../index.ts'),
       name: 'sunlit-ui',
       fileName: 'index',
       formats: ['es'],
