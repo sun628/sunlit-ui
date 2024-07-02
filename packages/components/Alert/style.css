@@ -58,7 +58,7 @@
       top: 12px;
       right: 15px;
       cursor: pointer;
-      :deep(.er-icon) {
+      :deep(.n-icon) {
         vertical-align: top;
       }
     }

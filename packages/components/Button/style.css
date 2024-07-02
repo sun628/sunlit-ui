@@ -86,7 +86,7 @@
     background-color: var(--n-button-disabled-bg-color);
     border-color: var(--n-button-disabled-border-color);
   }
-  [class*='er-icon'] {
+  [class*='n-icon'] {
     width: 1em;
     height: 1em;
   }
@@ -144,7 +144,7 @@
     border-radius: 50%;
     padding: 5px;
   }
-  [class*='er-icon'] {
+  [class*='n-icon'] {
     width: 12px;
     height: 12px;
   }
