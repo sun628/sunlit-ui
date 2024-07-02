@@ -4,7 +4,7 @@ import DefaultTheme from 'vitepress/theme';
 import SunlitUI from 'sunlit-ui';
 
 import '@vitepress-demo-preview/component/dist/style.css';
-import 'sunlit-ui/dist/index.css';
+// import 'sunlit-ui/dist/index.css';
 
 export default {
   ...DefaultTheme,
