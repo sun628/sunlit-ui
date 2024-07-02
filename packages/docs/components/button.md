@@ -8,7 +8,7 @@ next:
 
 prev:
   link: /get-started
-  text: 快速开始
+  text: 快速上手
 ---
 
 # Button 按钮

@@ -5,7 +5,7 @@ next:
   text: Button 按钮
 ---
 
-# 基于 Vue 3 + TypeScript 快速开发 UI 组件库
+# 快速上手
 
 ## 安装
 
