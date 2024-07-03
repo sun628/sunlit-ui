@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import { readdir, readdirSync } from 'fs';
 import { resolve } from 'path';
 import { defer, delay, filter, map } from 'lodash-es';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 import terser from '@rollup/plugin-terser';
 import ModifyFiles from '../ModifyFiles';
@@ -14,7 +15,14 @@ const isProd = process.env.NODE_ENV === 'production';
 const isDev = process.env.NODE_ENV === 'development';
 const isTest = process.env.NODE_ENV === 'test';
 
+const VITE_REPORT = process.env.npm_lifecycle_event === 'build:report'; //是否打包分析
+
+const _visualizer = visualizer({
+  filename: 'dist/stats.html',
+});
+
 const TRY_MOVE_STYLES_DELAY = 800 as const;
+console.log('🚀 ~ TRY_MOVE_STYLES_DELAY:', TRY_MOVE_STYLES_DELAY);
 
 function getDirectoriesSync(basePath: string) {
   const entries = readdirSync(basePath, { withFileTypes: true });
@@ -71,6 +79,7 @@ export default defineConfig({
         keep_fnames: isDev,
       },
     }),
+    VITE_REPORT && _visualizer,
   ],
   build: {
     outDir: 'dist/es',
