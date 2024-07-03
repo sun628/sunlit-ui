@@ -44,7 +44,6 @@
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/vue-fontawesome": "^3.0.8",
     "@popperjs/core": "^2.11.8",
-    "@sunlit-ui/components": "workspace:*",
     "async-validator": "^4.2.5"
   },
   "peerDependencies": {
@@ -52,6 +51,7 @@
   },
   "devDependencies": {
     "@rollup/plugin-terser": "^0.4.4",
+    "@sunlit-ui/components": "workspace:*",
     "terser": "^5.31.1",
     "vite-plugin-compression2": "^1.1.1"
   }
