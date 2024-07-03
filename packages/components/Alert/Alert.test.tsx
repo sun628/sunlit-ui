@@ -8,10 +8,6 @@ import { NAlert } from './index';
 import Alert from './Alert.vue';
 import NIcon from '../Icon/Icon.vue';
 
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import { library } from '@fortawesome/fontawesome-svg-core';
-library.add(faXmark);
-
 describe('Alert.vue', () => {
   const title = 'Test Alert' as const;
   const desc = 'This is a test description' as const;

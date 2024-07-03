@@ -2,10 +2,6 @@ import { describe, it, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
 import NIcon from './Icon.vue';
 
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-library.add(faSpinner);
-
 // 模拟 FontAwesomeIcon 组件
 const MockFontAwesomeIcon = () => ({
   // 渲染一个 span 作为 font-awesome-icon 的占位符
