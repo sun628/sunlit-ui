@@ -2,7 +2,7 @@
 import type { AlertProps, AlertEmits, AlertInstance } from './types';
 import { typeIconMap } from '@sunlit-ui/utils';
 import { computed, ref } from 'vue';
-import NIcon from '../Icon/Icon.vue';
+import NIcon from '../icon/Icon.vue';
 
 defineOptions({
   name: 'NAlert',

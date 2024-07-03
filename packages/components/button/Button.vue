@@ -3,7 +3,7 @@ import { ref, computed, inject } from 'vue';
 import type { ButtonProps, ButtonEmits, ButtonInstance } from './types';
 import { BUTTON_GROUP_CTX_KEY } from './constants';
 import { throttle } from 'lodash-es';
-import NIcon from '../Icon/Icon.vue';
+import NIcon from '../icon/Icon.vue';
 defineOptions({
   name: 'NButton',
 });

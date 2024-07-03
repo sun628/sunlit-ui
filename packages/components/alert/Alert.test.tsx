@@ -6,7 +6,7 @@ import { withInstall } from '@sunlit-ui/utils';
 import { NAlert } from './index';
 
 import Alert from './Alert.vue';
-import NIcon from '../Icon/Icon.vue';
+import NIcon from '../icon/Icon.vue';
 
 describe('Alert.vue', () => {
   const title = 'Test Alert' as const;

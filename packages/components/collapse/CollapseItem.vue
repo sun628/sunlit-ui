@@ -3,7 +3,7 @@ import { type CollapseItemProps } from './types';
 import { inject, computed } from 'vue';
 import { COLLAPSE_CTX_KEY } from './constants';
 import transitionEvents from './transitionEvents';
-import NIcon from '../Icon/Icon.vue';
+import NIcon from '../icon/Icon.vue';
 
 defineOptions({
   name: 'NCollapseItem',
