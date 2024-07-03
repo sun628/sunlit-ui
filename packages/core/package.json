@@ -26,6 +26,7 @@
   },
   "scripts": {
     "build": "run-p build-es build-umd",
+    "build:report": "vite build --config build/vite.config.es.ts",
     "build:watch": "run-p build-es:watch build-umd:watch",
     "build-es": "vite build --config build/vite.config.es.ts",
     "build-umd": "vite build --config build/vite.config.umd.ts",
@@ -52,7 +53,8 @@
   "devDependencies": {
     "@rollup/plugin-terser": "^0.4.4",
     "@sunlit-ui/components": "workspace:*",
+    "rollup-plugin-visualizer": "^5.12.0",
     "terser": "^5.31.1",
-    "vite-plugin-compression2": "^1.1.1"
+    "vite-plugin-compression2": "^1.1.2"
   }
 }

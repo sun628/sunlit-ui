@@ -7,9 +7,6 @@
     "test": "vitest --coverage",
     "test:ui": "vitest --ui"
   },
-  "devDependencies": {
-    "axios": "^1.6.8"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC"
