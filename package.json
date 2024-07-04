@@ -2,6 +2,7 @@
   "name": "@sunlit-ui/workspace",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "dev": "pnpm -C packages/play dev",
@@ -9,7 +10,9 @@
     "docs:dev": "pnpm --filter @sunlit-ui/docs dev",
     "docs:build": "pnpm --filter @sunlit-ui/docs build",
     "docs:preview": "pnpm --filter @sunlit-ui/docs preview",
-    "test": "cross-env NODE_ENV=test pnpm --filter @sunlit-ui/components test",
+    "test": "run-p test-comp test-utils",
+    "test-comp": "cross-env NODE_ENV=test pnpm --filter @sunlit-ui/components test",
+    "test-utils": "cross-env NODE_ENV=test pnpm --filter @sunlit-ui/utils test",
     "test:ui": "cross-env NODE_ENV=test pnpm --filter @sunlit-ui/components test:ui",
     "build": "cross-env NODE_ENV=production pnpm --filter sunlit-ui build",
     "build:dev": "cross-env NODE_ENV=development pnpm --filter sunlit-ui build:watch"
