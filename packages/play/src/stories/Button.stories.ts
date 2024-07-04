@@ -1,7 +1,7 @@
 import type { Meta, StoryObj, ArgTypes } from '@storybook/vue3';
 import { fn, within, userEvent, expect } from '@storybook/test';
 import { NButton, NButtonGroup } from 'sunlit-ui';
-import 'sunlit-ui/dist/theme/Button.css';
+import 'sunlit-ui/dist/theme/button.css';
 type Story = StoryObj<typeof NButton> & { argTypes?: ArgTypes };
 
 const meta: Meta<typeof NButton> = {

@@ -2,7 +2,7 @@ import type { StoryObj, Meta, ArgTypes } from '@storybook/vue3';
 import { ref, watch } from 'vue';
 import { fn } from '@storybook/test';
 import { NAlert, type AlertInstance } from 'sunlit-ui';
-import 'sunlit-ui/dist/theme/Alert.css';
+import 'sunlit-ui/dist/theme/alert.css';
 
 type Story = StoryObj<typeof NAlert> & { argTypes?: ArgTypes };
 

@@ -3,13 +3,12 @@ import { noop, each } from 'lodash-es';
 
 type SFCWithInstall<T> = T & Plugin;
 
-export function makeInstaller(components: Plugin[]) {
-  const install = (app: App) =>
-    each(components, (c) => {
-      app.use(c);
-    });
+export function makeInstaller(componets: Plugin[]) {
+  const installer = (app: App) => {
+    each(componets, (c) => app.use(c));
+  };
 
-  return install;
+  return installer as Plugin;
 }
 
 export const withInstall = <T>(component: T) => {

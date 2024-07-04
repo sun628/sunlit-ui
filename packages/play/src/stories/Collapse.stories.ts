@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 import { NCollapse, NCollapseItem } from 'sunlit-ui';
-import 'sunlit-ui/dist/theme/Collapse.css';
+import 'sunlit-ui/dist/theme/collapse.css';
 
 type Story = StoryObj<typeof NCollapse>;
 
