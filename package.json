@@ -7,10 +7,10 @@
   "scripts": {
     "dev": "pnpm -C packages/play dev",
     "story": "pnpm --filter @sunlit-ui/play storybook",
+    "test": "run-p test-comp test-utils",
     "docs:dev": "pnpm --filter @sunlit-ui/docs dev",
     "docs:build": "pnpm --filter @sunlit-ui/docs build",
     "docs:preview": "pnpm --filter @sunlit-ui/docs preview",
-    "test": "run-p test-comp test-utils",
     "test-comp": "cross-env NODE_ENV=test pnpm --filter @sunlit-ui/components test",
     "test-utils": "cross-env NODE_ENV=test pnpm --filter @sunlit-ui/utils test",
     "test:ui": "cross-env NODE_ENV=test pnpm --filter @sunlit-ui/components test:ui",
@@ -47,7 +47,7 @@
     "release-it": "^17.4.1",
     "shelljs": "^0.8.5",
     "typescript": "5.5.3",
-    "vite": "5.3.2",
+    "vite": "5.3.3",
     "vite-plugin-dts": "^3.9.1",
     "vitest": "1.6.0",
     "vue-tsc": "2.0.24"
@@ -60,7 +60,7 @@
     "async-validator": "^4.2.5",
     "lodash-es": "4.17.21",
     "sunlit-ui": "workspace:*",
-    "vue": "3.4.31"
+    "vue": "3.4.29"
   },
   "engines": {
     "node": ">=18.0.0"

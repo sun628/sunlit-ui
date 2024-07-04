@@ -11,20 +11,18 @@
     "build-storybook": "storybook build"
   },
   "devDependencies": {
-    "@chromatic-com/storybook": "1.5.0",
-    "@storybook/addon-essentials": "^8.1.10",
-    "@storybook/addon-interactions": "^8.1.10",
-    "@storybook/addon-links": "^8.1.10",
-    "@storybook/blocks": "^8.1.10",
-    "@storybook/test": "^8.1.10",
-    "@storybook/vue3": "^8.1.10",
-    "@storybook/vue3-vite": "^8.1.10",
-    "@vitejs/plugin-vue": "^5.0.4",
-    "storybook": "^8.1.10"
-  },
-  "dependencies": {
-    "-": "^0.0.1",
-    "g": "^2.0.1",
-    "http-server": "^14.1.1"
+    "@chromatic-com/storybook": "1.6.0",
+    "@storybook/addon-essentials": "^8.1.11",
+    "@storybook/addon-interactions": "^8.1.11",
+    "@storybook/addon-links": "^8.1.11",
+    "@storybook/addon-onboarding": "^8.1.11",
+    "@storybook/blocks": "^8.1.11",
+    "@storybook/react": "^8.1.11",
+    "@storybook/react-vite": "^8.1.11",
+    "@storybook/test": "^8.1.11",
+    "@storybook/vue3": "^8.1.11",
+    "@storybook/vue3-vite": "^8.1.11",
+    "prop-types": "15.8.1",
+    "storybook": "^8.1.11"
   }
 }
