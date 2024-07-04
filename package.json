@@ -7,12 +7,12 @@
   "scripts": {
     "dev": "pnpm -C packages/play dev",
     "story": "pnpm --filter @sunlit-ui/play storybook",
-    "test": "run-p test-comp test-utils",
+    "test": "run-s test-utils test-comp",
     "docs:dev": "pnpm --filter @sunlit-ui/docs dev",
     "docs:build": "pnpm --filter @sunlit-ui/docs build",
     "docs:preview": "pnpm --filter @sunlit-ui/docs preview",
-    "test-comp": "cross-env NODE_ENV=test pnpm --filter @sunlit-ui/components test",
-    "test-utils": "cross-env NODE_ENV=test pnpm --filter @sunlit-ui/utils test",
+    "test-comp": "cross-env NODE_ENV=test pnpm --filter @sunlit-ui/components test:run",
+    "test-utils": "cross-env NODE_ENV=test pnpm --filter @sunlit-ui/utils test:run",
     "test:ui": "cross-env NODE_ENV=test pnpm --filter @sunlit-ui/components test:ui",
     "build": "cross-env NODE_ENV=production pnpm --filter sunlit-ui build",
     "build:dev": "cross-env NODE_ENV=development pnpm --filter sunlit-ui build:watch"

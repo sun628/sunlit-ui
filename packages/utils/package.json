@@ -5,6 +5,7 @@
   "type": "module",
   "main": "index.ts",
   "scripts": {
+    "test:run": "vitest --run --coverage",
     "test": "vitest --coverage"
   },
   "keywords": [],
