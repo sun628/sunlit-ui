@@ -1,24 +1,24 @@
-import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
-import { resolve } from 'path';
-import { compression } from 'vite-plugin-compression2';
-import terser from '@rollup/plugin-terser';
-import { defer, delay } from 'lodash-es';
-import ModifyFiles from '../ModifyFiles';
-import { readFile } from 'fs';
-import shell from 'shelljs';
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import { resolve } from 'path'
+import { compression } from 'vite-plugin-compression2'
+import terser from '@rollup/plugin-terser'
+import { defer, delay } from 'lodash-es'
+import { modifyFiles } from '@sunlit-ui/vite-plugins'
+import { readFile } from 'fs'
+import shell from 'shelljs'
 
-const isProd = process.env.NODE_ENV === 'production';
-const isDev = process.env.NODE_ENV === 'development';
-const isTest = process.env.NODE_ENV === 'test';
+const isProd = process.env.NODE_ENV === 'production'
+const isDev = process.env.NODE_ENV === 'development'
+const isTest = process.env.NODE_ENV === 'test'
 
-const TRY_MOVE_STYLES_DELAY = 800 as const;
+const TRY_MOVE_STYLES_DELAY = 800 as const
 
 function moveStyles() {
   readFile('./dist/umd/index.css.gz', (err) => {
-    if (err) return delay(moveStyles, TRY_MOVE_STYLES_DELAY);
-    defer(() => shell.cp('./dist/umd/index.css', './dist/index.css'));
-  });
+    if (err) return delay(moveStyles, TRY_MOVE_STYLES_DELAY)
+    defer(() => shell.cp('./dist/umd/index.css', './dist/index.css'))
+  })
 }
 export default defineConfig({
   plugins: [
@@ -38,7 +38,7 @@ export default defineConfig({
         },
       },
     }),
-    ModifyFiles({
+    modifyFiles({
       rmFiles: ['./dist/umd', './dist/index.css'],
       afterBuild: moveStyles,
     }),
@@ -59,10 +59,10 @@ export default defineConfig({
           vue: 'Vue',
         },
         assetFileNames: (assetInfo) => {
-          if (assetInfo.name === 'style.css') return 'index.css';
-          return assetInfo.name as string;
+          if (assetInfo.name === 'style.css') return 'index.css'
+          return assetInfo.name as string
         },
       },
     },
   },
-});
+})

@@ -1,42 +1,41 @@
-import { defineConfig } from 'vite';
-import { readdir, readdirSync } from 'fs';
-import { resolve } from 'path';
-import { defer, delay, filter, map } from 'lodash-es';
-import { visualizer } from 'rollup-plugin-visualizer';
+import { defineConfig } from 'vite'
+import { readdir, readdirSync } from 'fs'
+import { resolve } from 'path'
+import { defer, delay, filter, map } from 'lodash-es'
+import { visualizer } from 'rollup-plugin-visualizer'
 
-import terser from '@rollup/plugin-terser';
-import ModifyFiles from '../ModifyFiles';
+import terser from '@rollup/plugin-terser'
+import { modifyFiles } from '@sunlit-ui/vite-plugins'
 
-import dts from 'vite-plugin-dts';
-import vue from '@vitejs/plugin-vue';
-import shell from 'shelljs';
+import dts from 'vite-plugin-dts'
+import vue from '@vitejs/plugin-vue'
+import shell from 'shelljs'
 
-const isProd = process.env.NODE_ENV === 'production';
-const isDev = process.env.NODE_ENV === 'development';
-const isTest = process.env.NODE_ENV === 'test';
+const isProd = process.env.NODE_ENV === 'production'
+const isDev = process.env.NODE_ENV === 'development'
+const isTest = process.env.NODE_ENV === 'test'
 
-const VITE_REPORT = process.env.npm_lifecycle_event === 'build:report'; //是否打包分析
+const VITE_REPORT = process.env.npm_lifecycle_event === 'build:report' //是否打包分析
 
 const _visualizer = visualizer({
   filename: 'dist/stats.html',
-});
+})
 
-const TRY_MOVE_STYLES_DELAY = 800 as const;
-console.log('🚀 ~ TRY_MOVE_STYLES_DELAY:', TRY_MOVE_STYLES_DELAY);
+const TRY_MOVE_STYLES_DELAY = 800 as const
 
 function getDirectoriesSync(basePath: string) {
-  const entries = readdirSync(basePath, { withFileTypes: true });
+  const entries = readdirSync(basePath, { withFileTypes: true })
   return map(
     filter(entries, (entry) => entry.isDirectory()),
     (entry) => entry.name
-  );
+  )
 }
 
 function moveStyles() {
   readdir('./dist/es/theme', (err) => {
-    if (err) return delay(moveStyles, TRY_MOVE_STYLES_DELAY);
-    defer(() => shell.mv('./dist/es/theme', './dist'));
-  });
+    if (err) return delay(moveStyles, TRY_MOVE_STYLES_DELAY)
+    defer(() => shell.mv('./dist/es/theme', './dist'))
+  })
 }
 
 export default defineConfig({
@@ -47,7 +46,7 @@ export default defineConfig({
       tsconfigPath: '../../tsconfig.build.json',
       outDir: 'dist/types',
     }),
-    ModifyFiles({
+    modifyFiles({
       rmFiles: ['./dist/es', './dist/theme', './dist/types'],
       afterBuild: moveStyles,
     }),
@@ -102,29 +101,29 @@ export default defineConfig({
       ],
       output: {
         assetFileNames: (assetInfo) => {
-          if (assetInfo.name === 'style.css') return 'index.css';
+          if (assetInfo.name === 'style.css') return 'index.css'
           if (assetInfo.type === 'asset' && /\.(css)$/i.test(assetInfo.name as string)) {
-            return 'theme/[name].[ext]';
+            return 'theme/[name].[ext]'
           }
-          return assetInfo.name as string;
+          return assetInfo.name as string
         },
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            return 'vendor';
+            return 'vendor'
           }
           if (id.includes('/packages/hooks')) {
-            return 'hooks';
+            return 'hooks'
           }
           if (id.includes('/packages/utils') || id.includes('plugin-vue:export-helper')) {
-            return 'utils';
+            return 'utils'
           }
           for (const dirName of getDirectoriesSync('../components')) {
             if (id.includes(`/packages/components/${dirName}`)) {
-              return dirName;
+              return dirName
             }
           }
         },
       },
     },
   },
-});
+})
