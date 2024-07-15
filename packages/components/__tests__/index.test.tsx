@@ -9,7 +9,7 @@ import {
   NCollapseItem,
   NIcon,
   NTooltip,
-} from '..'
+} from '../index'
 
 const comps = [
   NAlert,
