@@ -204,6 +204,9 @@ importers:
       vitepress:
         specifier: 1.0.2
         version: 1.0.2(@algolia/client-search@4.24.0)(@types/node@20.14.9)(@types/react@18.3.3)(async-validator@4.2.5)(postcss@8.4.39)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(search-insights@2.15.0)(terser@5.31.2)(typescript@5.5.3)
+      vitepress-api-table:
+        specifier: workspace:*
+        version: link:../../libs/vitepress-api-table
 
   packages/hooks: {}
 
