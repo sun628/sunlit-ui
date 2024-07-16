@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "type": "module",
   "module": "./dist/index.js",
-  "main": "index.ts",
   "types": "./dist/index.d.ts",
   "keywords": [],
   "description": "",
