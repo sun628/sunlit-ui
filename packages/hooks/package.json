@@ -4,6 +4,8 @@
   "type": "module",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "author": "nuanyang",
+  "license": "ISC",
   "files": [
     "dist"
   ],
@@ -19,7 +21,12 @@
     "build": "vite build",
     "release": "release-it"
   },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "main": "index.js",
+  "devDependencies": {},
+  "description": ""
 }
