@@ -1,6 +1,6 @@
 {
   "name": "sunlit-ui",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "description": "components library by Vue3 + TS",
   "type": "module",
   "main": "./dist/umd/index.umd.cjs",
