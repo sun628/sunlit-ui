@@ -2,7 +2,6 @@ import { describe, test, it, expect, vi, beforeEach } from 'vitest'
 import { withInstall } from '@sunlit-ui/utils'
 import { mount } from '@vue/test-utils'
 import { NTooltip } from '.'
-
 import Tooltip from './Tooltip.vue'
 vi.mock('@popperjs/core')
 const onVisibleChange = vi.fn()

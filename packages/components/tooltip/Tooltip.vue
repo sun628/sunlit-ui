@@ -1,45 +1,45 @@
 <script setup lang="ts">
-import type { TooltipProps, TooltipEmits, TooltipInstance } from './types';
-import { createPopper, type Instance } from '@popperjs/core';
-import { bind, debounce, type DebouncedFunc } from 'lodash-es';
-import { ref, watchEffect, watch, computed, onUnmounted, type Ref } from 'vue';
-import { useClickOutside } from '@sunlit-ui/hooks';
+import type { TooltipProps, TooltipEmits, TooltipInstance } from './types'
+import { createPopper, type Instance } from '@popperjs/core'
+import { bind, debounce, type DebouncedFunc } from 'lodash-es'
+import { ref, watchEffect, watch, computed, onUnmounted, type Ref } from 'vue'
+import { useClickOutside } from '@sunlit-ui/hooks'
 
-import useEventsToTiggerNode from './useEventsToTiggerNode';
+import useEventsToTiggerNode from './useEventsToTiggerNode'
 
 interface _TooltipProps extends TooltipProps {
-  virtualRef?: HTMLElement | void;
-  virtualTriggering?: boolean;
+  virtualRef?: HTMLElement | void
+  virtualTriggering?: boolean
 }
 
 defineOptions({
   name: 'NTooltip',
-});
+})
 const props = withDefaults(defineProps<_TooltipProps>(), {
   placement: 'bottom',
   trigger: 'hover',
   transition: 'fade',
   showTimeout: 0,
   hideTimeout: 200,
-});
+})
 
-const emits = defineEmits<TooltipEmits>();
-const visible = ref(false);
+const emits = defineEmits<TooltipEmits>()
+const visible = ref(false)
 
-const events: Ref<Record<string, EventListener>> = ref({});
-const outerEvents: Ref<Record<string, EventListener>> = ref({});
-const dropdownEvents: Ref<Record<string, EventListener>> = ref({});
+const events: Ref<Record<string, EventListener>> = ref({})
+const outerEvents: Ref<Record<string, EventListener>> = ref({})
+const dropdownEvents: Ref<Record<string, EventListener>> = ref({})
 
-const containerNode = ref<HTMLElement>();
-const popperNode = ref<HTMLElement>();
-const _triggerNode = ref<HTMLElement>();
+const containerNode = ref<HTMLElement>()
+const popperNode = ref<HTMLElement>()
+const _triggerNode = ref<HTMLElement>()
 
 const triggerNode = computed(() => {
   if (props.virtualTriggering) {
-    return (props.virtualRef as HTMLElement) ?? _triggerNode.value;
+    return (props.virtualRef as HTMLElement) ?? _triggerNode.value
   }
-  return _triggerNode.value as HTMLElement;
-});
+  return _triggerNode.value as HTMLElement
+})
 
 const popperOptions = computed(() => ({
   placement: props.placement,
@@ -52,142 +52,142 @@ const popperOptions = computed(() => ({
     },
   ],
   ...props.popperOptions,
-}));
+}))
 
-const openDelay = computed(() => (props.trigger === 'hover' ? props.showTimeout : 0));
-const closeDelay = computed(() => (props.trigger === 'hover' ? props.hideTimeout : 0));
+const openDelay = computed(() => (props.trigger === 'hover' ? props.showTimeout : 0))
+const closeDelay = computed(() => (props.trigger === 'hover' ? props.hideTimeout : 0))
 
-const triggerStrategyMap: Map<string, () => void> = new Map();
+const triggerStrategyMap: Map<string, () => void> = new Map()
 triggerStrategyMap.set('hover', () => {
-  events.value['mouseenter'] = openFinal;
-  outerEvents.value['mouseleave'] = closeFinal;
-  dropdownEvents.value['mouseenter'] = openFinal;
-});
+  events.value['mouseenter'] = openFinal
+  outerEvents.value['mouseleave'] = closeFinal
+  dropdownEvents.value['mouseenter'] = openFinal
+})
 triggerStrategyMap.set('click', () => {
-  events.value['click'] = togglePopper;
-});
+  events.value['click'] = togglePopper
+})
 triggerStrategyMap.set('contextmenu', () => {
   events.value['contextmenu'] = (e) => {
-    e.preventDefault();
-    openFinal();
-  };
-});
+    e.preventDefault()
+    openFinal()
+  }
+})
 
-let openDebounce: DebouncedFunc<() => void> | void;
-let closeDebounce: DebouncedFunc<() => void> | void;
+let openDebounce: DebouncedFunc<() => void> | void
+let closeDebounce: DebouncedFunc<() => void> | void
 
 function openFinal() {
-  closeDebounce?.cancel();
-  openDebounce?.();
+  closeDebounce?.cancel()
+  openDebounce?.()
 }
 
 function closeFinal() {
-  openDebounce?.cancel();
-  closeDebounce?.();
+  openDebounce?.cancel()
+  closeDebounce?.()
 }
 
 function togglePopper() {
-  visible.value ? closeFinal() : openFinal();
+  visible.value ? closeFinal() : openFinal()
 }
 
 function setVisible(val: boolean) {
-  if (props.disabled) return;
-  visible.value = val;
-  emits('visible-change', val);
+  if (props.disabled) return
+  visible.value = val
+  emits('visible-change', val)
 }
 
 function attachEvents() {
-  if (props.disabled || props.manual) return;
+  if (props.disabled || props.manual) return
 
-  triggerStrategyMap.get(props.trigger)?.();
+  triggerStrategyMap.get(props.trigger)?.()
 }
 
-let popperInstance: null | Instance;
+let popperInstance: null | Instance
 
 function destroyPopperInstance() {
-  popperInstance?.destroy();
-  popperInstance = null;
+  popperInstance?.destroy()
+  popperInstance = null
 }
 
 function resetEvents() {
-  events.value = {};
-  outerEvents.value = {};
-  dropdownEvents.value = {};
+  events.value = {}
+  outerEvents.value = {}
+  dropdownEvents.value = {}
 
-  attachEvents();
+  attachEvents()
 }
 
-const show: TooltipInstance['show'] = openFinal;
+const show: TooltipInstance['show'] = openFinal
 const hide: TooltipInstance['hide'] = function () {
-  openDebounce?.cancel();
-  setVisible(false);
-};
+  openDebounce?.cancel()
+  setVisible(false)
+}
 
 watch(
   visible,
   (val) => {
-    if (!val) return;
+    if (!val) return
     if (triggerNode.value && popperNode.value) {
       popperInstance = createPopper(
         triggerNode.value,
         popperNode.value,
         popperOptions.value
-      );
+      )
     }
   },
   { flush: 'post' }
-);
+)
 
 watch(
   () => props.manual,
   (isManual) => {
     if (isManual) {
-      resetEvents();
-      return;
+      resetEvents()
+      return
     }
-    attachEvents();
+    attachEvents()
   }
-);
+)
 
 watch(
   () => props.trigger,
   () => {
-    openDebounce?.cancel();
-    visible.value = false;
-    emits('visible-change', false);
-    resetEvents();
+    openDebounce?.cancel()
+    visible.value = false
+    emits('visible-change', false)
+    resetEvents()
   }
-);
+)
 
 watchEffect(() => {
   if (!props.manual) {
-    attachEvents();
+    attachEvents()
   }
-  openDebounce = debounce(bind(setVisible, null, true), openDelay.value);
-  closeDebounce = debounce(bind(setVisible, null, false), closeDelay.value);
-});
+  openDebounce = debounce(bind(setVisible, null, true), openDelay.value)
+  closeDebounce = debounce(bind(setVisible, null, false), closeDelay.value)
+})
 
 useClickOutside(containerNode, () => {
-  emits('click-outside');
-  if (props.trigger === 'hover' || props.manual) return;
+  emits('click-outside')
+  if (props.trigger === 'hover' || props.manual) return
 
-  visible.value && closeFinal();
-});
+  visible.value && closeFinal()
+})
 
 useEventsToTiggerNode(props, triggerNode, events, () => {
-  openDebounce?.cancel();
-  setVisible(false);
-});
+  openDebounce?.cancel()
+  setVisible(false)
+})
 
 onUnmounted(() => {
-  console.log('Component unmounted');
-  destroyPopperInstance();
-});
+  console.log('Component unmounted')
+  destroyPopperInstance()
+})
 
 defineExpose<TooltipInstance>({
   show,
   hide,
-});
+})
 </script>
 
 <template>
