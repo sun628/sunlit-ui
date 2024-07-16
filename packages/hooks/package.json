@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "module": "./dist/index.js",
+  "main": "index.ts",
   "types": "./dist/index.d.ts",
   "keywords": [],
   "description": "",
@@ -19,5 +20,8 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "devDependencies": {}
+  "peerDependencies": {
+    "vue": "^3.4.29",
+    "lodash-es": "^4.17.21"
+  }
 }
