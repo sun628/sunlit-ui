@@ -19,13 +19,13 @@ pnpm i sunlit-ui
 
 ```js
 // 引入所有组件
-import SunlitUI from 'sunlit-ui';
+import SunlitUI from 'sunlit-ui'
 // 引入样式
-import 'sunlit-ui/dist/index.css';
+import 'sunlit-ui/dist/index.css'
 
-import App from './App.vue';
+import App from './App.vue'
 // 全局使用
-createApp(App).use(SunlitUI).mount('#app');
+createApp(App).use(SunlitUI).mount('#app')
 ```
 
 ```vue
@@ -43,16 +43,14 @@ Sunlit-UI 提供了基于 ES Module 的开箱即用的 Tree Shaking 功能。
   <n-button>我是 Button</n-button>
 </template>
 <script>
-import { NButton } from ' sunlit-ui';
+import { NButton } from ' sunlit-ui'
 export default {
   components: { NButton },
-};
+}
 </script>
 ```
 
-:::
-api-table src=components/Button/types.ts
-:::
+::: api-table src=components/Button/types.ts
 
 ## 其他
 
