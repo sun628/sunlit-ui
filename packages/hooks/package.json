@@ -15,6 +15,10 @@
       "types": "./dist/index.d.ts"
     }
   },
+  "scripts": {
+    "test": "vitest --run --coverage",
+    "build": "vite build"
+  },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
