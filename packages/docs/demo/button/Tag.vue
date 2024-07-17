@@ -4,7 +4,7 @@
   <n-button
     type="primary"
     tag="a"
-    href="https://github.com/EricWXY/eric-ui"
+    href="https://github.com/sun628/sunlit-ui"
     target="_blank"
     rel="noopener noreferrer"
   >
