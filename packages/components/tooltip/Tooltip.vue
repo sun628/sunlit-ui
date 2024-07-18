@@ -180,7 +180,6 @@ useEventsToTiggerNode(props, triggerNode, events, () => {
 })
 
 onUnmounted(() => {
-  console.log('Component unmounted')
   destroyPopperInstance()
 })
 
