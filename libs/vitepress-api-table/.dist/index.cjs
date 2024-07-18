@@ -8,7 +8,11 @@ var path = require('path');
 var lodashEs = require('lodash-es');
 
 var _documentCurrentScript = typeof document !== 'undefined' ? document.currentScript : null;
-const mdit = new MarkdownIt();
+const mdit = new MarkdownIt({
+    html: true,
+    linkify: true,
+    typographer: true,
+});
 const _readFile = (filename) => {
     const __filename = url.fileURLToPath((typeof document === 'undefined' ? require('u' + 'rl').pathToFileURL(__filename).href : (_documentCurrentScript && _documentCurrentScript.src || new URL('index.cjs', document.baseURI).href)));
     const __dirname = path.dirname(__filename);
@@ -39,10 +43,13 @@ function generateMarkdownDocumentation(content, interfaceName) {
     if (!match)
         return 'No interface found';
     const propertiesBlock = match[1];
-    let markdownTable = `## ${interfaceName}\n\n| Property | Type | Default | Description |\n| --- | --- | --- | --- |\n`;
+    let markdownTable = `## ${interfaceName}\n\n| Property | Type | Description | Default |\n| --- | --- | --- | --- |\n`;
+    lodashEs.each(match, (matchItem) => {
+        console.log('🚀 ~ each ~ matchItem:', matchItem);
+    });
     const properties = parsePropertyComments(propertiesBlock);
     lodashEs.each(properties, (propertie) => {
-        markdownTable += `| ${propertie.propertyName} | ${propertie.propertyType} | ${propertie.defaultValue} | ${propertie.description} |\n`;
+        markdownTable += `| ${propertie.propertyName} | ${propertie.propertyType.replace(/\|/g, '&#124;')}| ${propertie.description} | ${propertie.defaultValue} |\n`;
     });
     return markdownTable;
 }
@@ -55,12 +62,18 @@ function parsePropertyComments(propertyStr) {
             propertyName: '',
             propertyType: '',
             description: '',
+            defaultValue: '',
         };
         const propNameMatch = prop.match(/@property\s*(.*?)\s*(?:\n\s*\*\s*@|\*\/)/s);
+        console.log('🚀 ~ each ~ propNameMatch:', propNameMatch);
+        const propTypeMatch = prop.match(/@type\s*(.*?)\s*(?:\n\s*\*\s*@|\*\/)/s);
         const descMatch = prop.match(/@description\s*(.*?)\s*(?:\n\s*\*\s*@|\*\/)/s);
         const defaultValueMatch = prop.match(/@default\s*(.*?)\s*(?:\n\s*\*\s*@|\*\/)/s);
         if (propNameMatch) {
             propInfo.propertyName = propNameMatch[1].trim();
+        }
+        if (propTypeMatch) {
+            propInfo.propertyType = propTypeMatch[1];
         }
         if (descMatch) {
             propInfo.description = descMatch[1].trim();

@@ -13,7 +13,11 @@ interface PropertyInfo {
   defaultValue?: string
 }
 
-const mdit = new MarkdownIt()
+const mdit = new MarkdownIt({
+  html: true,
+  linkify: true,
+  typographer: true,
+})
 
 const _readFile = (filename: string) => {
   const __filename = fileURLToPath(import.meta.url)
@@ -53,13 +57,12 @@ function generateMarkdownDocumentation(content: string, interfaceName: string) {
 
   const propertiesBlock = match[1]
 
-  let markdownTable = `## ${interfaceName}\n\n| Property | Type | Default | Description |\n| --- | --- | --- | --- |\n`
+  let markdownTable = `## ${interfaceName}\n\n| Property | Type | Description | Default |\n| --- | --- | --- | --- |\n`
 
   const properties = parsePropertyComments(propertiesBlock)
   each(properties, (propertie: PropertyInfo) => {
-    markdownTable += `| ${propertie.propertyName} | ${propertie.propertyType} | ${propertie.defaultValue} | ${propertie.description} |\n`
+    markdownTable += `| ${propertie.propertyName} | ${propertie.propertyType.replace(/\|/g, '&#124;')}| ${propertie.description} | ${propertie.defaultValue} |\n`
   })
-
   return markdownTable
 }
 
@@ -73,9 +76,12 @@ function parsePropertyComments(propertyStr: string): PropertyInfo[] {
       propertyName: '',
       propertyType: '',
       description: '',
+      defaultValue: '',
     }
 
     const propNameMatch = prop.match(/@property\s*(.*?)\s*(?:\n\s*\*\s*@|\*\/)/s)
+
+    const propTypeMatch = prop.match(/@type\s*(.*?)\s*(?:\n\s*\*\s*@|\*\/)/s)
 
     const descMatch = prop.match(/@description\s*(.*?)\s*(?:\n\s*\*\s*@|\*\/)/s)
 
@@ -83,6 +89,10 @@ function parsePropertyComments(propertyStr: string): PropertyInfo[] {
 
     if (propNameMatch) {
       propInfo.propertyName = propNameMatch[1].trim()
+    }
+
+    if (propTypeMatch) {
+      propInfo.propertyType = propTypeMatch[1].trim()
     }
 
     if (descMatch) {
