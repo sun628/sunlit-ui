@@ -6,7 +6,6 @@
     tag="a"
     href="https://github.com/sun628/sunlit-ui"
     target="_blank"
-    rel="noopener noreferrer"
   >
     a
   </n-button>

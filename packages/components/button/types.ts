@@ -7,7 +7,7 @@ export type ButtonSize = 'large' | 'default' | 'small'
 export interface ButtonProps {
   /**
    * @property tag
-   * @type string|Component
+   * @type string | Component
    * @description 自定义元素标签
    * @default "button"
    */

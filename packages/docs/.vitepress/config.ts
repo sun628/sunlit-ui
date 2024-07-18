@@ -33,9 +33,9 @@ export default defineConfig({
   },
   markdown: {
     config(md) {
+      md.use(apiTable)
       md.use(containerPreview)
       md.use(componentPreview)
-      md.use(apiTable)
     },
   },
 })
