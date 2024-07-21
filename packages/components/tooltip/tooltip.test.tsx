@@ -223,7 +223,7 @@ describe('Tooltip.vue', () => {
             <button id="trigger">trigger</button>
           </Tooltip>
         </div>
-      ),
+      ),                   
       {
         attachTo: document.body,
       }
