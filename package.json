@@ -52,13 +52,15 @@
     "vite": "5.3.3",
     "vite-plugin-dts": "^3.9.1",
     "vitest": "1.6.0",
-    "vue-tsc": "2.0.24"
+    "vue-tsc": "2.0.24",
+    "vue3-i18n": "^1.1.5"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
     "@sunlit-ui/hooks": "workspace:*",
     "@sunlit-ui/theme": "workspace:*",
     "@sunlit-ui/utils": "workspace:*",
+    "@sunlit-ui/locale": "workspace:*",
     "@sunlit-ui/vite-plugins": "workspace:*",
     "@types/node": "20.14.9",
     "async-validator": "^4.2.5",
