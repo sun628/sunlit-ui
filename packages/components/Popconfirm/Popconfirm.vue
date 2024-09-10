@@ -5,7 +5,7 @@ import { useLocale } from '@sunlit-ui/hooks'
 import type { TooltipInstance } from '../Tooltip'
 import type { PopconfirmProps, PopconfirmEmits } from './types'
 
-import NTooltip from '../tooltip/Tooltip.vue'
+import NTooltip from '../Tooltip/Tooltip.vue'
 import NButton from '../Button/Button.vue'
 import NIcon from '../icon/Icon.vue'
 
