@@ -1,16 +1,16 @@
-import type { AlertType } from './types';
+import type { AlertType } from './types'
 
-import { describe, it, expect, vi } from 'vitest';
-import { mount } from '@vue/test-utils';
-import { withInstall } from '@sunlit-ui/utils';
-import { NAlert } from './index';
+import { describe, it, expect, vi } from 'vitest'
+import { mount } from '@vue/test-utils'
+import { withInstall } from '@sunlit-ui/utils'
+import { NAlert } from './index'
 
-import Alert from './Alert.vue';
-import NIcon from '../icon/Icon.vue';
+import Alert from './Alert.vue'
+import NIcon from '../Icon/Icon.vue'
 
 describe('Alert.vue', () => {
-  const title = 'Test Alert' as const;
-  const desc = 'This is a test description' as const;
+  const title = 'Test Alert' as const
+  const desc = 'This is a test description' as const
   it('should render the alert with default props', () => {
     const wrapper = mount(Alert, {
       props: {
@@ -22,20 +22,20 @@ describe('Alert.vue', () => {
       global: {
         stubs: ['NIcon'],
       },
-    });
-    expect(wrapper.text()).toContain(title);
-    expect(wrapper.text()).toContain(desc);
+    })
+    expect(wrapper.text()).toContain(title)
+    expect(wrapper.text()).toContain(desc)
 
     // close icon
-    const iconElement = wrapper.findComponent(NIcon);
-    expect(iconElement.exists()).toBeTruthy();
-    expect(iconElement.attributes('icon')).toBe('xmark');
+    const iconElement = wrapper.findComponent(NIcon)
+    expect(iconElement.exists()).toBeTruthy()
+    expect(iconElement.attributes('icon')).toBe('xmark')
 
-    const wrapper2 = mount(() => <Alert title={title} description={desc}></Alert>);
+    const wrapper2 = mount(() => <Alert title={title} description={desc}></Alert>)
 
-    expect(wrapper2.text()).toContain(title);
-    expect(wrapper2.text()).toContain(desc);
-  });
+    expect(wrapper2.text()).toContain(title)
+    expect(wrapper2.text()).toContain(desc)
+  })
 
   it.each([
     ['info', 'circle-info'],
@@ -58,15 +58,15 @@ describe('Alert.vue', () => {
       global: {
         stubs: ['NIcon'],
       },
-    });
+    })
 
-    const iconElement = wrapper.findComponent(NIcon);
-    expect(iconElement.exists()).toBeTruthy();
-    expect(iconElement.attributes('icon')).toBe(iconName);
-  });
+    const iconElement = wrapper.findComponent(NIcon)
+    expect(iconElement.exists()).toBeTruthy()
+    expect(iconElement.attributes('icon')).toBe(iconName)
+  })
 
   it('should emit close event when close icon is clicked', () => {
-    const onClose = vi.fn();
+    const onClose = vi.fn()
 
     const wrapper = mount(Alert, {
       props: {
@@ -81,10 +81,10 @@ describe('Alert.vue', () => {
       global: {
         stubs: ['NIcon'],
       },
-    });
-    wrapper.findComponent(NIcon).trigger('click');
-    expect(onClose).toHaveBeenCalled();
-  });
+    })
+    wrapper.findComponent(NIcon).trigger('click')
+    expect(onClose).toHaveBeenCalled()
+  })
 
   it('should allow custom content via slots', () => {
     const wrapper = mount(Alert, {
@@ -95,11 +95,11 @@ describe('Alert.vue', () => {
         default: desc,
         title,
       },
-    });
-    expect(wrapper.text()).toContain(desc);
-    expect(wrapper.text()).toContain(title);
-    expect(wrapper.text()).not.toContain('test title');
-  });
+    })
+    expect(wrapper.text()).toContain(desc)
+    expect(wrapper.text()).toContain(title)
+    expect(wrapper.text()).not.toContain('test title')
+  })
 
   it('should support centering text', () => {
     const wrapper = mount(Alert, {
@@ -108,47 +108,47 @@ describe('Alert.vue', () => {
         description: desc,
         center: true,
       },
-    });
+    })
     //class
-    const rootNode = wrapper.find('.n-alert');
-    expect(rootNode.classes()).toContain('text-center');
-  });
+    const rootNode = wrapper.find('.n-alert')
+    expect(rootNode.classes()).toContain('text-center')
+  })
 
   it('should not render close icon when closable is false', () => {
     const wrapper = mount(Alert, {
       props: { closable: false },
-    });
-    expect(wrapper.find('.n-alert__close').exists()).toBe(false);
-  });
+    })
+    expect(wrapper.find('.n-alert__close').exists()).toBe(false)
+  })
 
   it('should toggle visibility when open and close methods are called', async () => {
     const wrapper = mount(Alert, {
       props: { title, closable: false },
-    });
-    await wrapper.vm.close();
-    expect(wrapper.find('.n-alert').attributes().style).toBe('display: none;');
-    await wrapper.vm.open();
-    expect(wrapper.find('.n-alert').attributes().style).toBe('');
-  });
-});
+    })
+    await wrapper.vm.close()
+    expect(wrapper.find('.n-alert').attributes().style).toBe('display: none;')
+    await wrapper.vm.open()
+    expect(wrapper.find('.n-alert').attributes().style).toBe('')
+  })
+})
 
 describe('Alert/index', () => {
   it('should be exported with withInstall()', () => {
-    expect(NAlert.install).toBeDefined();
-  });
+    expect(NAlert.install).toBeDefined()
+  })
   it('component should be exported', () => {
-    expect(NAlert).toBe(Alert);
-  });
+    expect(NAlert).toBe(Alert)
+  })
 
   // 可选
   it('should enhance Alert component', () => {
-    const enhancedAlert = withInstall(Alert);
-    expect(enhancedAlert).toBe(NAlert);
-  });
+    const enhancedAlert = withInstall(Alert)
+    expect(enhancedAlert).toBe(NAlert)
+  })
 
   // 可选
   it('should apply specific enhance', () => {
-    const enhancedAlert = withInstall(Alert);
-    expect(enhancedAlert).toHaveProperty('install');
-  });
-});
+    const enhancedAlert = withInstall(Alert)
+    expect(enhancedAlert).toHaveProperty('install')
+  })
+})

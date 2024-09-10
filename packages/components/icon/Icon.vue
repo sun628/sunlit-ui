@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { type IconProps } from './types';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { omit } from 'lodash-es';
-import { computed } from 'vue';
+import { type IconProps } from './types'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { omit } from 'lodash-es'
+import { computed } from 'vue'
 
 defineOptions({
   name: 'NIcon',
   inheritAttrs: false,
-});
+})
 
-const props = defineProps<IconProps>();
+const props = defineProps<IconProps>()
 
-const filterProps = computed(() => omit(props, ['type', 'color']));
-const customStyles = computed(() => ({ color: props.color ?? void 0 }));
+const filterProps = computed(() => omit(props, ['type', 'color']))
+const customStyles = computed(() => ({ color: props.color ?? void 0 }))
 </script>
 
 <template>

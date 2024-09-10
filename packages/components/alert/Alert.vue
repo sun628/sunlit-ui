@@ -1,40 +1,40 @@
 <script setup lang="ts">
-import type { AlertProps, AlertEmits, AlertInstance } from './types';
-import { typeIconMap } from '@sunlit-ui/utils';
-import { computed, ref } from 'vue';
-import NIcon from '../icon/Icon.vue';
+import type { AlertProps, AlertEmits, AlertInstance } from './types'
+import { typeIconMap } from '@sunlit-ui/utils'
+import { computed, ref } from 'vue'
+import NIcon from '../Icon/Icon.vue'
 
 defineOptions({
   name: 'NAlert',
-});
+})
 
 const props = withDefaults(defineProps<AlertProps>(), {
   effect: 'light',
   type: 'info',
   closable: true,
-});
+})
 
-const emits = defineEmits<AlertEmits>();
-const slots = defineSlots();
+const emits = defineEmits<AlertEmits>()
+const slots = defineSlots()
 
-const visible = ref(true);
+const visible = ref(true)
 
-const iconName = computed(() => typeIconMap.get(props.type) ?? 'circle-info');
-const withDescription = computed(() => props.description || slots.default);
+const iconName = computed(() => typeIconMap.get(props.type) ?? 'circle-info')
+const withDescription = computed(() => props.description || slots.default)
 
 function close() {
-  visible.value = false;
-  emits('close');
+  visible.value = false
+  emits('close')
 }
 
 function open() {
-  visible.value = true;
+  visible.value = true
 }
 
 defineExpose<AlertInstance>({
   close,
   open,
-});
+})
 </script>
 
 <template>

@@ -7,7 +7,7 @@ import type { PopconfirmProps, PopconfirmEmits } from './types'
 
 import NTooltip from '../Tooltip/Tooltip.vue'
 import NButton from '../Button/Button.vue'
-import NIcon from '../icon/Icon.vue'
+import NIcon from '../Icon/Icon.vue'
 
 defineOptions({
   name: 'NPopconfirm',
