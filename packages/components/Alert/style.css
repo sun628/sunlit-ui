@@ -1,0 +1,100 @@
+.n-alert {
+  --n-alert-padding: 8px 16px;
+  --n-alert-border-radius-base: var(--n-border-radius-base);
+  --n-alert-bg-color: var(--n-color-white);
+  --n-alert-title-font-size: 14px;
+  --n-alert-title-font-size-with-desc: 16px;
+  --n-alert-desc-font-size: 14px;
+  --n-alert-text-color: var(--n-text-color-primary);
+  --n-alert-top-margin: 20px;
+  --n-alert-icon-size: 16px;
+  --n-alert-icon-margin: 8px;
+  --n-alert-big-icon-size: 28px;
+  --n-alert-big-icon-margin: 12px;
+}
+.n-alert {
+  padding: var(--n-alert-padding);
+  margin: 0;
+  box-sizing: border-box;
+  border-radius: var(--n-alert-border-radius-base);
+  position: relative;
+  background-color: var(--n-alert-bg-color);
+  overflow: hidden;
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  transition: opacity var(--n-transition-duration);
+  margin-top: var(--n-alert-top-margin);
+  .n-alert__icon {
+    color: var(--n-alert-text-color);
+    font-size: var(--n-alert-icon-size);
+    width: var(--n-alert-icon-size);
+    margin-right: var(--n-alert-icon-margin);
+    &.big-icon {
+      font-size: var(--n-alert-big-icon-size);
+      width: var(--n-alert-big-icon-size);
+      margin-right: var(--n-alert-big-icon-margin);
+    }
+  }
+  .n-alert__content {
+    color: var(--n-alert-text-color);
+    vertical-align: text-top;
+    .n-alert__title {
+      font-size: var(--n-alert-title-font-size);
+      line-height: 24px;
+      &.with-desc {
+        font-size: var(--n-alert-title-font-size-with-desc);
+      }
+    }
+    .n-alert__description {
+      font-size: var(--n-alert-desc-font-size);
+      margin: 0;
+    }
+
+    .n-alert__close {
+      font-size: var(--n-alert-close-font-size);
+      opacity: 1;
+      position: absolute;
+      top: 12px;
+      right: 15px;
+      cursor: pointer;
+      :deep(.n-icon) {
+        vertical-align: top;
+      }
+    }
+    &.n-alert__light {
+      .n-alert__close {
+        color: var(--n-text-color-placeholder);
+      }
+    }
+    &.n-alert__dark {
+      .n-alert__close {
+        color: var(--n-color-white);
+      }
+    }
+  }
+
+  &.text-center {
+    justify-content: center;
+    span,
+    p {
+      text-align: center;
+    }
+  }
+}
+
+.n-alert-fade-enter-from,
+.n-alert-fade-leave-to {
+  opacity: 0;
+}
+
+@each $val in success, warning, info, danger {
+  .n-alert__$(val).n-alert__light {
+    --n-alert-text-color: var(--n-color-$(val));
+    --n-alert-bg-color: var(--n-color-$(val)-light-9);
+  }
+  .n-alert__$(val).n-alert__dark {
+    --n-alert-text-color: var(--n-color-white);
+    --n-alert-bg-color: var(--n-color-$(val));
+  }
+}

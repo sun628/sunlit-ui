@@ -9,6 +9,7 @@ import {
   NCollapseItem,
   NIcon,
   NTooltip,
+  NPopconfirm,
 } from '../index'
 
 const comps = [
@@ -19,6 +20,7 @@ const comps = [
   NCollapseItem,
   NIcon,
   NTooltip,
+  NPopconfirm,
 ] as Plugin[]
 
 describe('components/index', () => {
