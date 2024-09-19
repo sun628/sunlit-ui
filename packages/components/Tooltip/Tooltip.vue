@@ -7,16 +7,17 @@ import { useClickOutside } from '@sunlit-ui/hooks'
 import type { TooltipProps, TooltipEmits, TooltipInstance } from './types'
 import type { ButtonInstance } from '../Button'
 
-import useEventsToTriggerNode from './useEventsToTriggerNode'
+import useEvenstToTiggerNode from './useEventsToTriggerNode'
+
+defineOptions({
+  name: 'NTooltip',
+})
 
 interface _TooltipProps extends TooltipProps {
   virtualRef?: HTMLElement | ButtonInstance | void
   virtualTriggering?: boolean
 }
 
-defineOptions({
-  name: 'NTooltip',
-})
 const props = withDefaults(defineProps<_TooltipProps>(), {
   placement: 'bottom',
   trigger: 'hover',
@@ -24,7 +25,6 @@ const props = withDefaults(defineProps<_TooltipProps>(), {
   showTimeout: 0,
   hideTimeout: 200,
 })
-
 const emits = defineEmits<TooltipEmits>()
 const visible = ref(false)
 
@@ -37,9 +37,13 @@ const popperNode = ref<HTMLElement>()
 const _triggerNode = ref<HTMLElement>()
 
 const triggerNode = computed(() => {
-  if (props.virtualTriggering) {
-    return (props.virtualRef as HTMLElement) ?? _triggerNode.value
-  }
+  if (props.virtualTriggering)
+    return (
+      // @tips any 为了 fix 一个初始设计上的小失误 （后续重构 "虚拟目标节点" 时解决）
+      ((props.virtualRef as ButtonInstance)?.ref as any) ??
+      (props.virtualRef as HTMLElement) ??
+      _triggerNode.value
+    )
   return _triggerNode.value as HTMLElement
 })
 
@@ -57,6 +61,7 @@ const popperOptions = computed(() => ({
 }))
 
 const openDelay = computed(() => (props.trigger === 'hover' ? props.showTimeout : 0))
+
 const closeDelay = computed(() => (props.trigger === 'hover' ? props.hideTimeout : 0))
 
 const triggerStrategyMap: Map<string, () => void> = new Map()
@@ -100,12 +105,10 @@ function setVisible(val: boolean) {
 
 function attachEvents() {
   if (props.disabled || props.manual) return
-
   triggerStrategyMap.get(props.trigger)?.()
 }
 
 let popperInstance: null | Instance
-
 function destroyPopperInstance() {
   popperInstance?.destroy()
   popperInstance = null
@@ -119,16 +122,28 @@ function resetEvents() {
   attachEvents()
 }
 
+if (!props.manual) {
+  attachEvents()
+}
+
 const show: TooltipInstance['show'] = openFinal
+
 const hide: TooltipInstance['hide'] = function () {
   openDebounce?.cancel()
   setVisible(false)
 }
 
+useClickOutside(containerNode, () => {
+  emits('click-outside')
+  if (props.trigger === 'hover' || props.manual) return
+  visible.value && closeFinal()
+})
+
 watch(
   visible,
   (val) => {
     if (!val) return
+
     if (triggerNode.value && popperNode.value) {
       popperInstance = createPopper(
         triggerNode.value,
@@ -144,7 +159,9 @@ watch(
   () => props.manual,
   (isManual) => {
     if (isManual) {
-      resetEvents()
+      events.value = {}
+      outerEvents.value = {}
+      dropdownEvents.value = {}
       return
     }
     attachEvents()
@@ -153,7 +170,16 @@ watch(
 
 watch(
   () => props.trigger,
-  () => {
+  (newTrigger, oldTrigger) => {
+    if (newTrigger === oldTrigger) return
+    resetEvents()
+  }
+)
+
+watch(
+  () => props.disabled,
+  (val, oldVal) => {
+    if (val === oldVal) return
     openDebounce?.cancel()
     visible.value = false
     emits('visible-change', false)
@@ -162,21 +188,11 @@ watch(
 )
 
 watchEffect(() => {
-  if (!props.manual) {
-    attachEvents()
-  }
   openDebounce = debounce(bind(setVisible, null, true), openDelay.value)
   closeDebounce = debounce(bind(setVisible, null, false), closeDelay.value)
 })
 
-useClickOutside(containerNode, () => {
-  emits('click-outside')
-  if (props.trigger === 'hover' || props.manual) return
-
-  visible.value && closeFinal()
-})
-
-useEventsToTriggerNode(props, triggerNode, events, () => {
+useEvenstToTiggerNode(props, triggerNode, events, () => {
   openDebounce?.cancel()
   setVisible(false)
 })
