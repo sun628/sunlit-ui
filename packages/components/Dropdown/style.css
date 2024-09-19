@@ -6,7 +6,7 @@
 }
 .n-dropdown {
   display: inline-block;
-  .er-tooltip {
+  .n-tooltip {
     --n-popover-padding: 5px 0;
   }
   &.is-disabled > * {
