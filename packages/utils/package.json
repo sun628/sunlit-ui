@@ -1,14 +1,28 @@
 {
   "name": "@sunlit-ui/utils",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
   "type": "module",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "main": "index.ts",
+  "keywords": [
+    "@sunlit-ui/utils"
+  ],
+  "author": "nuanyang",
+  "description": "",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "scripts": {
     "test": "vitest --run --coverage",
-    "test:watch": "vitest --coverage"
+    "test:watch": "vitest --coverage",
+    "build": "vite build"
   },
-  "keywords": [],
-  "author": "",
   "license": "ISC"
 }
