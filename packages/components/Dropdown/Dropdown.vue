@@ -14,7 +14,7 @@ import type { TooltipInstance } from '../Tooltip/types'
 
 import { type ButtonInstance, NButton, NButtonGroup } from '../Button'
 import DropdownItem from './DropdownItem.vue'
-import Tooltip from '../Tooltip/Tooltip.vue'
+import NTooltip from '../Tooltip/Tooltip.vue'
 
 defineOptions({
   name: 'NDropdown',
@@ -57,7 +57,7 @@ provide<DropdownContext>(DROPDOWN_CTX_KEY, {
     :id="`dropdown-${useId().value}`"
     :class="{ 'is-disabled': props.disabled }"
   >
-    <tooltip
+    <n-tooltip
       ref="tooltipRef"
       v-bind="tooltipProps"
       :virtual-triggering="splitButton"
@@ -81,7 +81,7 @@ provide<DropdownContext>(DROPDOWN_CTX_KEY, {
           </slot>
         </ul>
       </template>
-    </tooltip>
+    </n-tooltip>
   </div>
 </template>
 

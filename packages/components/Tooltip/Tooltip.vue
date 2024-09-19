@@ -7,7 +7,7 @@ import { useClickOutside } from '@sunlit-ui/hooks'
 import type { TooltipProps, TooltipEmits, TooltipInstance } from './types'
 import type { ButtonInstance } from '../Button'
 
-import useEventsToTiggerNode from './useEventsToTiggerNode'
+import useEventsToTriggerNode from './useEventsToTriggerNode'
 
 interface _TooltipProps extends TooltipProps {
   virtualRef?: HTMLElement | ButtonInstance | void
@@ -176,7 +176,7 @@ useClickOutside(containerNode, () => {
   visible.value && closeFinal()
 })
 
-useEventsToTiggerNode(props, triggerNode, events, () => {
+useEventsToTriggerNode(props, triggerNode, events, () => {
   openDebounce?.cancel()
   setVisible(false)
 })
