@@ -14,8 +14,9 @@
     "test-comp": "cross-env NODE_ENV=test pnpm --filter @sunlit-ui/components test",
     "test-utils": "cross-env NODE_ENV=test pnpm --filter @sunlit-ui/utils test",
     "test-hooks": "cross-env NODE_ENV=test pnpm --filter @sunlit-ui/hooks test",
-    "build": "run-s build-hooks build-comp",
+    "build": "run-s build-utils build-hooks build-comp",
     "build-comp": "cross-env NODE_ENV=production pnpm --filter sunlit-ui build",
+    "build-utils": "cross-env NODE_ENV=production pnpm --filter @sunlit-ui/utils build",
     "build-hooks": "cross-env NODE_ENV=production pnpm --filter @sunlit-ui/hooks build",
     "build:dev": "cross-env NODE_ENV=development pnpm --filter sunlit-ui build:watch",
     "release": "pnpm --filter sunlit-ui release"
