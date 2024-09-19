@@ -7,6 +7,7 @@ import {
   NTooltip,
   NAlert,
   NPopconfirm,
+  NDropdown,
 } from '@sunlit-ui/components'
 import type { Plugin } from 'vue'
 
@@ -19,4 +20,5 @@ export default [
   NTooltip,
   NAlert,
   NPopconfirm,
+  NDropdown,
 ] as Plugin[]
